@@ -1,0 +1,25 @@
+[Unit]
+Description=XGIF Telegram bot
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=xgif
+Group=xgif
+ExecStart=/usr/local/bin/xgif
+Restart=on-failure
+RestartSec=5
+# Exit code 2 means bad configuration or missing yt-dlp: do not restart-loop.
+RestartPreventExitStatus=2
+KillSignal=SIGTERM
+TimeoutStopSec=90
+
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/etc/xgif
+
+[Install]
+WantedBy=multi-user.target
